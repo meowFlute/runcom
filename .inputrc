@@ -1,0 +1,10 @@
+# Respect default shortcuts.
+$include /etc/inputrc
+
+## arrow up
+"\e[1;2A":history-search-backward
+## arrow down
+"\e[1;2B":history-search-forward
+
+# This makes it so tab autocompletion of she can find 'Shell'
+set completion-ignore-case On
