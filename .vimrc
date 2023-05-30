@@ -16,6 +16,13 @@ Plugin 'VundleVim/Vundle.vim'
 " e.g. :G commit -a -m commit_message_string
 Plugin 'tpope/vim-fugitive'
 
+" NERD tree adds tree exploration
+Plugin 'scrooloose/nerdtree'
+" The github page has a bunch of documentation
+" toggling command :NERDTreeToggle
+
+Plugin 'xuyuanp/nerdtree-git-plugin'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
