@@ -139,6 +139,11 @@ then
     sudo apt install --assume-yes vim-addon-manager vim-youcompleteme
     vim-addon-manager install youcompleteme
     echo_colorized -fg "YouCompleteMe Installed"
+
+    echo
+    echo_colorized -fg "Installing compiledb"
+    sudo apt install --assume-yes python3-pip
+    yes | sudo pip3 install compiledb
 else
     echo_colorized -fr "Not installing YouCompleteMe"
 fi
