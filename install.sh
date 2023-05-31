@@ -21,46 +21,35 @@ lib_path="$BASEDIR/echo_colors"
 # Log file
 log_file=$BASEDIR/install_log.txt
 
-# function to append to install_log.txt
-append_log()
-{
-    echo "$(date) $1" >> $log_file
-}
-
 # Here is a function to process the files and check for symlinks and such
 process_file()
 {
     old_file=$1
     new_file=$2
     
-    append_log "processing old_file=$old_file new_file=$new_file"
     echo_colorized -fg "Processing $old_file as needed..."
     if [ -e $old_file ] || [ -f $old_file ]
     then
 	# ~/.old_file exists
-	append_log "$old_file exists"
 	echo_colorized -fy "$old_file exists"
 	if [ -h $old_file ]
 	then
 	    # ~/.old_file is a symlink
-	    append_log "$old_file is symlink"
 	    echo_colorized -fc "$old_file is an existing symlink, note the location of the old file:"
 	    ls -l $old_file
-	    append_log "$(ls -l $old_file)"
+
 	fi
 	echo_colorized -fr "removing $old_file"
 	rm $old_file
-	append_log "$old_file removed"
+
     else
-	append_log "$old_file does not exist"
 	echo_colorized "$old_file never existed, no worries"
     fi
 
-    append_log "creating new symlink"
     echo_colorized "creating symlink $old_file -> $new_file"
     ln -s $new_file $old_file
     ls -l $old_file
-    append_log "$(ls -l $old_file)" 
+
 }
 
 # So these are the new files
@@ -73,7 +62,6 @@ home_bashrc=$HOME/.bashrc
 home_inputrc=$HOME/.inputrc
 home_vimrc=$HOME/.vimrc
 
-append_log "\nStarting install script\n"
 process_file $home_bashrc $new_bashrc
 echo
 process_file $home_inputrc $new_inputrc
@@ -85,20 +73,26 @@ dracula_vim_destination=$HOME/.vim/pack/themes/start
 echo
 if [ -e $dracula_vim_destination/dracula/colors/dracula.vim ] && [ -e $dracula_vim_destination/dracula/autoload/dracula.vim ]
 then
-    append_log "dracula vim files already present"
     echo_colorized -fg "The dracula vim files appear to already be there -- good!"
 else
-    append_log "dracula vim files not present"
     if [ -d $dracula_vim_destination/dracula ]
     then
-	append_log "dracula vim files not present, but directory is -- recursively deleting $dracula_vim_destination/dracula" 
 	echo_colorized -fr "The $dracula_vim_destination/dracula folder is there, but doesn't have the right stuff in it -- deleting and cloning repo"
 	rm -rf $dracula_vim_destination/dracula
     fi
-    append_log "cloning in dracula vim repo to $dracula_vim_destination/dracula"
     echo_colorized "cloning in dracula vim repo to $dracula_vim_destination/dracula"
     mkdir -p $dracula_vim_destination
     git clone https://github.com/dracula/vim.git $dracula_vim_destination/dracula
+fi
+
+# There are a few steps that use Vundle, so we need to install that as well
+echo
+echo_colorized -fg "Installing Vundle from github"
+if [ -e $HOME/.vim/bundle/Vundle.vim ]
+then
+    echo_colorized -fy "    Vundle is already installed"
+else
+    git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
 fi
 
 # Vundle install now that .vimrc is correct
