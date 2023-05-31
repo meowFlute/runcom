@@ -135,6 +135,7 @@ if [ ! -z "$yn_response" ] && [ "$yn_response" = "y" ]
 then
     echo_colorized -fg "Installing YouCompleteMe"
     echo_colorized -fy "We'll probably need your password unless you ran this as sudo or something"
+    sudo apt update
     sudo apt install --assume-yes vim-addon-manager vim-youcompleteme
     vim-addon-manager install youcompleteme
     echo_colorized -fg "YouCompleteMe Installed"
