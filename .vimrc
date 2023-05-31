@@ -20,8 +20,15 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdtree'
 " The github page has a bunch of documentation
 " toggling command :NERDTreeToggle
-
 Plugin 'xuyuanp/nerdtree-git-plugin'
+
+" ALE is a potential alternative to YouCompleteMe
+" Syntastic is depreciated, so I'll try this one
+" Plugin 'dense-analysis/ale'
+" 
+" I ended up deciding against ALE because when compared to YouCompleteMe, it
+" isn't even close. The experience in YouCompleteMe is downright awesome as
+" far as I can tell
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -105,6 +112,8 @@ packadd! dracula
 syntax enable
 colorscheme dracula
 
+" Add the termdebug plug-in
+packadd! termdebug
 
 " More stuff from Shell Scripting by Steve Parker:
 " show line numbers
