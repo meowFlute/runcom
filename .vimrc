@@ -22,6 +22,12 @@ Plugin 'scrooloose/nerdtree'
 " toggling command :NERDTreeToggle
 Plugin 'xuyuanp/nerdtree-git-plugin'
 
+" This one just updates php syntax highlighting to be more modern
+Plugin 'stanangeloff/php.vim'
+
+" Support a DBGP debugger
+Plugin 'joonty/vdebug'
+
 " ALE is a potential alternative to YouCompleteMe
 " Syntastic is depreciated, so I'll try this one
 " Plugin 'dense-analysis/ale'
@@ -162,3 +168,6 @@ set smarttab
 " show whitespace at the end of a line
 " highlight WhitespaceEOL ctermbg=blue guibg=blue
 " match WhitespaceEOL /\s\+$/
+
+" Auto generate tags file on file write of *.c and *.h files
+autocmd BufWritePost *.c,*.h,*.php silent! !ctags . &

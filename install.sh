@@ -100,6 +100,13 @@ echo_colorized -fg "\nInstalling Vundle Packages"
 vim +PluginInstall +qall
 echo_colorized -fg "Vundle Packages Installed"
 
+echo_colorized -fg "\nInstalling php-xdebug for vdebug package"
+if [ "$EUID" -ne 0 ]
+    echo_colorized -fy "Password needed, por favor"
+fi
+sudo apt update
+sudo apt install php-xdebug || echo_colorized -fy -br "APT INSTALL ERROR DETECTED"
+
 # the .vimrc uses vundle or packadd to get all of our necessary vim plugins except for one, YouCompleteMe
 # we'll use a select to ask the user if they want to install YouCompleteMe 
 echo
@@ -134,16 +141,24 @@ echo
 if [ ! -z "$yn_response" ] && [ "$yn_response" = "y" ]
 then
     echo_colorized -fg "Installing YouCompleteMe"
-    echo_colorized -fy "We'll probably need your password unless you ran this as sudo or something"
+    if [ "$EUID" -ne 0 ]
+    then
+	echo_colorized -fy "We'll need your password"
+    fi
     sudo apt update
     sudo apt install --assume-yes vim-addon-manager vim-youcompleteme
-    vim-addon-manager install youcompleteme
-    echo_colorized -fg "YouCompleteMe Installed"
+    if [ $? -ne 0 ]
+    then
+	echo_colorized -fy -br "ERROR DETECTED DURING APT INSTALL"
+    else
+	vim-addon-manager install youcompleteme
+	echo_colorized -fg "YouCompleteMe Installed"
 
-    echo
-    echo_colorized -fg "Installing compiledb"
-    sudo apt install --assume-yes python3-pip
-    yes | sudo pip3 install compiledb
+	echo
+	echo_colorized -fg "Installing compiledb"
+	sudo apt install --assume-yes python3-pip
+	yes | sudo pip3 install compiledb
+    fi
 else
     echo_colorized -fr "Not installing YouCompleteMe"
 fi
