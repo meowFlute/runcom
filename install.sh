@@ -106,7 +106,7 @@ then
     echo_colorized -fy "Password needed, por favor"
 fi
 sudo apt update
-sudo apt install php-xdebug || echo_colorized -fy -br "APT INSTALL ERROR DETECTED"
+sudo apt install --assume-yes php-xdebug || echo_colorized -fy -br "APT INSTALL ERROR DETECTED"
 
 # the .vimrc uses vundle or packadd to get all of our necessary vim plugins except for one, YouCompleteMe
 # we'll use a select to ask the user if they want to install YouCompleteMe 
