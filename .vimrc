@@ -25,8 +25,9 @@ Plugin 'xuyuanp/nerdtree-git-plugin'
 " This one just updates php syntax highlighting to be more modern
 Plugin 'stanangeloff/php.vim'
 
+" I decided that I didn't really like xdebug, might try it again later tho
 " Support a DBGP debugger
-Plugin 'joonty/vdebug'
+" Plugin 'joonty/vdebug'
 
 " ALE is a potential alternative to YouCompleteMe
 " Syntastic is depreciated, so I'll try this one

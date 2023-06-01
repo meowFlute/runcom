@@ -1,5 +1,0 @@
-# installed vundle:
-
-0. sudo apt install curl # if curl isn't already there
-1. git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-2. make updates to .vimrc

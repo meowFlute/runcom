@@ -15,7 +15,7 @@ popd > /dev/null # This just gets us back to where we were before all that cd'in
 
 # source the echo_colors library using $BASEDIR
 # This allows us to use the echo_colorized function (see echo_colors)
-lib_path="$BASEDIR/echo_colors"
+lib_path="$BASEDIR/echo_colors/echo_colors"
 [ -z "$_echo_colors" ] && . $lib_path
 
 # Log file
@@ -100,13 +100,15 @@ echo_colorized -fg "\nInstalling Vundle Packages"
 vim +PluginInstall +qall
 echo_colorized -fg "Vundle Packages Installed"
 
-echo_colorized -fg "\nInstalling php-xdebug for vdebug package"
-if [ "$EUID" -ne 0 ]
-then
-    echo_colorized -fy "Password needed, por favor"
-fi
-sudo apt update
-sudo apt install --assume-yes php-xdebug || echo_colorized -fy -br "APT INSTALL ERROR DETECTED"
+# I decided that I don't really like Xdebug... I might come back to it later,
+# but I didn't like my experience with it when I tried it out
+# echo_colorized -fg "\nInstalling php-xdebug for vdebug package"
+# if [ "$EUID" -ne 0 ]
+# then
+#     echo_colorized -fy "Password needed, por favor"
+# fi
+# sudo apt update
+# sudo apt install --assume-yes php-xdebug || echo_colorized -fy -br "APT INSTALL ERROR DETECTED"
 
 # the .vimrc uses vundle or packadd to get all of our necessary vim plugins except for one, YouCompleteMe
 # we'll use a select to ask the user if they want to install YouCompleteMe 
@@ -168,4 +170,4 @@ echo
 echo_colorized "All done!"
 echo_colorized -fy -br "INSTALL NOTE"
 echo_colorized -fy "Remember, you now have the script library echo_colors"
-echo_colorized -fy "Refer to runcom/echo_colors_test.sh"
+echo_colorized -fy "Refer to runcom/echo_colors/echo_colors_test.sh"
