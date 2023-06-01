@@ -102,6 +102,7 @@ echo_colorized -fg "Vundle Packages Installed"
 
 echo_colorized -fg "\nInstalling php-xdebug for vdebug package"
 if [ "$EUID" -ne 0 ]
+then
     echo_colorized -fy "Password needed, por favor"
 fi
 sudo apt update
