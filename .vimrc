@@ -174,3 +174,18 @@ set smarttab
 
 " Auto generate tags file on file write of *.c and *.h files
 autocmd BufWritePost *.c,*.h,*.php silent! !ctags . &
+
+" Customize the status line
+" Any functions go here
+
+" Statusline creation (with comments of what I'm doing) goes here
+set statusline=
+set statusline+=%F " This displays the full path to the current file
+set statusline+=%m " Modified flag [+] (or [-] if modifiable is off)
+set statusline+=%r " Read-only flag
+set statusline+=\ \|\ %y " filetype
+" file format and ecoding is below
+set statusline+=\ \|\ [%{&ff}\ -\ %{strlen(&fenc)?&fenc:'none'}]
+set statusline+=%= " Right to left justification separation
+set statusline+=char:\ 0x%04B " hex value of character under cursor 
+set statusline+=\ \|\ %3p%%   " Percentage through file
