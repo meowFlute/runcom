@@ -158,7 +158,8 @@ set incsearch
 au FileType c set cindent et tw=79 sw=4 sts=4
 au FileType sh set ai et sw=4 sts=4 noexpandtab
 au FileType vim set ai et sw=2 sts=2 noexpandtab
-au FileType html set ai et sw=4 sts=4 noexpandtab
+au FileType html set ai et sw=4 sts=4 noexpandtab encoding=utf-8 fileencoding=utf-8
+au FileType php set ai et sw=4 sts=4 noexpandtab encoding=utf-8 fileencoding=utf-8
 
 " indent new lines to match the current indentation
 set autoindent
