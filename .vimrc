@@ -173,7 +173,7 @@ set smarttab
 " match WhitespaceEOL /\s\+$/
 
 " Auto generate tags file on file write of *.c and *.h files
-autocmd BufWritePost *.c,*.h,*.php silent! !ctags . &
+" autocmd BufWritePost *.c,*.h,*.php silent! !ctags . &
 
 " Customize the status line
 " Any functions go here
