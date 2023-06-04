@@ -143,3 +143,8 @@ if [ "$TERM" = "linux" ]; then
 	printf %b '\e]PFffffff'    # redefine 'bright-white'   as '#ffffff'
 	clear
 fi
+
+# Set the default editor as vim for all programs and git
+export GIT_EDITOR=vim
+export VISUAL=vim
+export EDITOR=vim

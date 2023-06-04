@@ -167,6 +167,13 @@ else
 fi
 
 echo
+
+echo_colorized -fp "Just going to set some git --global configs to be vim"
+git config --global core.editor vim
+git config --global diff.tool vim
+git config --global merge.tool vim
+git config --global --add difftool.prompt false
+
 echo_colorized "All done!"
 echo_colorized -fy -br "INSTALL NOTE"
 echo_colorized -fy "Remember, you now have the script library echo_colors"

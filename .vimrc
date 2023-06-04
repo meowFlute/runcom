@@ -187,6 +187,6 @@ set statusline+=\ \|\ %y " filetype
 " file format and ecoding is below
 set statusline+=\ \|\ [%{&ff}\ -\ %{strlen(&fenc)?&fenc:'none'}]
 set statusline+=%= " Right to left justification separation
-set statusline+=char:\ 0x%04B " hex value of character under cursor 
+set statusline+=char:\ 0x%02B " hex value of character under cursor 
 set statusline+=\ \|\ %3p%%   " Percentage through file
 set laststatus=2
