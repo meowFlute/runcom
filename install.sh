@@ -170,8 +170,8 @@ echo
 
 echo_colorized -fp "Just going to set some git --global configs to be vim"
 git config --global core.editor vim
-git config --global diff.tool vim
-git config --global merge.tool vim
+git config --global diff.tool vimdiff
+git config --global merge.tool vimdiff
 git config --global --add difftool.prompt false
 
 echo_colorized "All done!"
