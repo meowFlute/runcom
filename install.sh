@@ -28,9 +28,9 @@ process_file()
     new_file=$2
     
     echo_colorized -fg "Processing $old_file as needed..."
-    if [ -e $old_file ] || [ -f $old_file ]
+    if [ -e $old_file ] || [ -h $old_file ]
     then
-	# ~/.old_file exists
+	# ~/.old_file exists as a file or a symlink
 	echo_colorized -fy "$old_file exists"
 	if [ -h $old_file ]
 	then
