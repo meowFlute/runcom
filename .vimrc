@@ -25,6 +25,9 @@ Plugin 'xuyuanp/nerdtree-git-plugin'
 " This one just updates php syntax highlighting to be more modern
 Plugin 'stanangeloff/php.vim'
 
+" Another plugin for LaTeX
+Plugin 'lervag/vimtex'
+
 " I decided that I didn't really like xdebug, might try it again later tho
 " Support a DBGP debugger
 " Plugin 'joonty/vdebug'
@@ -160,6 +163,7 @@ au FileType sh set ai et sw=4 sts=4 noexpandtab
 au FileType vim set ai et sw=2 sts=2 noexpandtab
 au FileType html set ai et sw=4 sts=4 noexpandtab encoding=utf-8 fileencoding=utf-8
 au FileType php set ai et sw=4 sts=4 noexpandtab encoding=utf-8 fileencoding=utf-8
+au FileType tex set wrap
 
 " indent new lines to match the current indentation
 set autoindent

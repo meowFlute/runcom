@@ -148,3 +148,42 @@ fi
 export GIT_EDITOR=vim
 export VISUAL=vim
 export EDITOR=vim
+
+# Add ESP8266 toolchain if it exists
+if [ -d $HOME/espressif/xtensa-lx106-elf/bin ]
+then
+    export PATH="$PATH:$HOME/espressif/xtensa-lx106-elf/bin"
+fi
+
+# Setup ESP8266 RTOS SDK if that exists
+if [ -d $HOME/espressif/ESP8266_RTOS_SDK ] 
+then
+    export IDF_PATH="$HOME/espressif/ESP8266_RTOS_SDK"
+    # if [ ! -e /usr/bin/python ] && [ -e /usr/bin/python3 ]
+    # then
+	# This is mostly just a note for later... I don't want to do this on every installation, but I needed this for my Ubuntu laptop
+	# The flashing ESP8266 toolchain only seems to work if you have this setup because they built it on python2
+	# sudo ln -s /usr/bin/python3 /usr/bin/python
+    # fi
+fi
+
+# stuff for texlive
+if [ -d /usr/local/texlive/2023/bin/x86_64-linux ]; then
+    PATH=/usr/local/texlive/2023/bin/x86_64-linux:$PATH
+fi
+if [ -d /usr/local/texlive/2023/texmf-dist/doc/man ]; then
+    # $MANPATH is often just empty on my machines and we don't want to end with a colon
+    if [ -z $MANPATH ]; then
+	MANPATH=/usr/local/texlive/2023/texmf-dist/doc/man
+    else
+	MANPATH=/usr/local/texlive/2023/texmf-dist/doc/man:$MANPATH
+    fi
+fi
+if [ -d /usr/local/texlive/2023/texmf-dist/doc/info ]; then
+    # $INFOPATH is often empty as well
+    if [ -z $INFOPATH ]; then
+	INFOPATH=/usr/local/texlive/2023/texmf-dist/doc/info
+    else
+	INFOPATH=/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH
+    fi
+fi
