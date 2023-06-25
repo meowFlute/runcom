@@ -18,9 +18,6 @@ popd > /dev/null # This just gets us back to where we were before all that cd'in
 lib_path="$BASEDIR/echo_colors/echo_colors"
 [ -z "$_echo_colors" ] && . $lib_path
 
-# Log file
-log_file=$BASEDIR/install_log.txt
-
 # Here is a function to process the files and check for symlinks and such
 process_file()
 {
