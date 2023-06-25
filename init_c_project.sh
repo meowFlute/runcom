@@ -73,7 +73,10 @@ then
     dir_to_init=${dir_to_init::-1}
 fi
 
+echo_colorized -fp "Initializing ${project_name,,} the in the ${dir_to_init} folder"
+
 # 1) Setting up a src directory with <proj_name>.c, <proj_name>.h, and main.c
+echo_colorized -fP "\tGenerating ${dir_to_init}/src"
 src_dir="${dir_to_init}/src"
 main_file="main.c"
 proj_c="${project_name,,}.c"
@@ -87,6 +90,7 @@ if [ -f "${src_dir}/${proj_h}" ]; then rm "${src_dir}/${proj_h}"; fi
 touch "${src_dir}/${proj_h}"
 
 # 2) Creating boilerplate #ifndef->#define->#endif for the header file
+echo_colorized -fc "\t\tCreating ${src_dir}/${proj_h}"
 header_var="_${project_name^^}"
 echo "#ifndef ${header_var}" >> "${src_dir}/${proj_h}"
 echo "#define ${header_var}" >> "${src_dir}/${proj_h}"
@@ -97,6 +101,7 @@ echo "#endif // ${header_var}" >> "${src_dir}/${proj_h}"
 
 # 3) Creating a boilerplate hello_<proj_name>_world() function that main.c calls
 # create the <project_name>.c version
+echo_colorized -fc "\t\tCreating ${src_dir}/${proj_c}"
 echo "#include \"${proj_h}\"" >> "${src_dir}/${proj_c}"
 echo "#include <stdio.h>" >> "${src_dir}/${proj_c}"
 echo >> "${src_dir}/${proj_c}"
@@ -106,6 +111,7 @@ echo "    printf(\"hello, ${project_name} world!\n\");" >> "${src_dir}/${proj_c}
 echo "}" >> "${src_dir}/${proj_c}"
 
 # create the main.c file
+echo_colorized -fc "\t\tCreating ${src_dir}/${main_file}"
 echo "#include \"${proj_h}\"" >> "${src_dir}/${main_file}"
 echo >> "${src_dir}/${main_file}"
 echo "int main(int argc, char * argv[])" >> "${src_dir}/${main_file}"
@@ -116,6 +122,7 @@ echo "}" >> "${src_dir}/${main_file}"
 
 # 4) Setting up a makefile that builds all object files in a build dir and the executable at the root level with a good make clean function
 Makefile="${dir_to_init}/Makefile"
+echo_colorized -fP "\tCreating Makefile"
 if [ -f $Makefile ]
 then
     rm $Makefile
@@ -165,4 +172,13 @@ echo -e "clean:" >> $Makefile
 echo -e "\trm -rf \$(BUILD_DIR) \$(TARGET_EXEC)" >> $Makefile
 
 # last thing we'll need is a .ctags file, I already have one of these in my runcom folder
+echo_colorized -fP "\tCopying over .ctags file from ${BASEDIR}/.ctags_c"
 cp "${BASEDIR}/.ctags_c" "${dir_to_init}/.ctags"
+echo_colorized -fp "DONE GENERATING FILES"
+
+# Might as well run make once everything is ready
+echo_colorized -fy -br "Running 'make'"
+cd $dir_to_init
+make
+echo_colorized -fy -br "DONE"
+echo_colorized -fp "Check out your new ${project_name} project in ${dir_to_init}!"
