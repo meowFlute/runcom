@@ -159,6 +159,8 @@ set incsearch
 " - textwidth (tw) maximum width of text
 " - softtabstop (sts) number of spaces that a tab counts for
 au FileType c set cindent et tw=79 sw=4 sts=4
+au FileType lex set cindent et tw=79 sw=4 sts=4
+au FileType cpp set cindent et tw=79 sw=4 sts=4
 au FileType sh set ai et sw=4 sts=4 noexpandtab
 au FileType vim set ai et sw=2 sts=2 noexpandtab
 au FileType html set ai et sw=4 sts=4 noexpandtab encoding=utf-8 fileencoding=utf-8
