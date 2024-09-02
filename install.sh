@@ -157,7 +157,7 @@ then
 	echo
 	echo_colorized -fg "Installing compiledb"
 	sudo apt install --assume-yes python3-pip
-	yes | sudo pip3 install compiledb
+	yes | sudo pip3 install compiledb --break-system-packages
     fi
 else
     echo_colorized -fr "Not installing YouCompleteMe"

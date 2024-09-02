@@ -187,3 +187,17 @@ if [ -d /usr/local/texlive/2023/texmf-dist/doc/info ]; then
 	INFOPATH=/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH
     fi
 fi
+
+
+# stuff for cuda
+if [ -d /usr/local/cuda/bin ]; then
+    PATH=/usr/local/cuda/bin:$PATH
+fi
+if [ -d /usr/local/cuda/lib64 ]; then
+    # this might not even be set
+    if [ ! -z LD_LIBRARY_PATH ]; then
+	LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+    else
+	export LD_LIBRARY_PATH=/usr/local/cuda/lib64
+    fi
+fi
