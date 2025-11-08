@@ -11,34 +11,8 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" plugins for my setup
-" fugitive adds git support with :Git or :G
-" e.g. :G commit -a -m commit_message_string
-Plugin 'tpope/vim-fugitive'
-
-" NERD tree adds tree exploration
-Plugin 'scrooloose/nerdtree'
-" The github page has a bunch of documentation
-" toggling command :NERDTreeToggle
-Plugin 'xuyuanp/nerdtree-git-plugin'
-
-" This one just updates php syntax highlighting to be more modern
-Plugin 'stanangeloff/php.vim'
-
-" Another plugin for LaTeX
-Plugin 'lervag/vimtex'
-
-" I decided that I didn't really like xdebug, might try it again later tho
-" Support a DBGP debugger
-" Plugin 'joonty/vdebug'
-
-" ALE is a potential alternative to YouCompleteMe
-" Syntastic is depreciated, so I'll try this one
-" Plugin 'dense-analysis/ale'
-" 
-" I ended up deciding against ALE because when compared to YouCompleteMe, it
-" isn't even close. The experience in YouCompleteMe is downright awesome as
-" far as I can tell
+" Dracula colorscheme
+Plugin 'dracula/vim', { 'name': 'dracula' }
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -89,6 +63,8 @@ if has("syntax")
   syntax on
 endif
 
+colorscheme dracula
+
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
 set background=dark
@@ -116,11 +92,6 @@ set mouse=a		" Enable mouse usage (all modes)
 if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
 endif
-
-" Set the dracula colorscheme located in /.vim/pack/themes/start/dracula
-packadd! dracula
-syntax enable
-colorscheme dracula
 
 " Add the termdebug plug-in
 packadd! termdebug

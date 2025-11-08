@@ -65,23 +65,6 @@ process_file $home_inputrc $new_inputrc
 echo
 process_file $home_vimrc $new_vimrc
 
-# the vimrc file needs the dracula stuff to be installed
-dracula_vim_destination=$HOME/.vim/pack/themes/start
-echo
-if [ -e $dracula_vim_destination/dracula/colors/dracula.vim ] && [ -e $dracula_vim_destination/dracula/autoload/dracula.vim ]
-then
-    echo_colorized -fg "The dracula vim files appear to already be there -- good!"
-else
-    if [ -d $dracula_vim_destination/dracula ]
-    then
-	echo_colorized -fr "The $dracula_vim_destination/dracula folder is there, but doesn't have the right stuff in it -- deleting and cloning repo"
-	rm -rf $dracula_vim_destination/dracula
-    fi
-    echo_colorized "cloning in dracula vim repo to $dracula_vim_destination/dracula"
-    mkdir -p $dracula_vim_destination
-    git clone https://github.com/dracula/vim.git $dracula_vim_destination/dracula
-fi
-
 # There are a few steps that use Vundle, so we need to install that as well
 echo
 echo_colorized -fg "Installing Vundle from github"
@@ -96,72 +79,6 @@ fi
 echo_colorized -fg "\nInstalling Vundle Packages"
 vim +PluginInstall +qall
 echo_colorized -fg "Vundle Packages Installed"
-
-# I decided that I don't really like Xdebug... I might come back to it later,
-# but I didn't like my experience with it when I tried it out
-# echo_colorized -fg "\nInstalling php-xdebug for vdebug package"
-# if [ "$EUID" -ne 0 ]
-# then
-#     echo_colorized -fy "Password needed, por favor"
-# fi
-# sudo apt update
-# sudo apt install --assume-yes php-xdebug || echo_colorized -fy -br "APT INSTALL ERROR DETECTED"
-
-# the .vimrc uses vundle or packadd to get all of our necessary vim plugins except for one, YouCompleteMe
-# we'll use a select to ask the user if they want to install YouCompleteMe 
-echo
-echo_colorized -fy -br "NOW THIS SCRIPT NEEDS YOUR INPUT ON SOMETHING"
-echo_colorized -fP "Do you want to install YouCompleteMe?"
-help_prompt="You can enter 1, 2, y, Y, yes, Yes, n, N, no, or No. Try again please"
-oPS3=$PS3 # Save off the select prompt before I alter it
-PS3="Select from one of the options above: "
-yn_response=
-select yn in "yes" "no"
-do
-    # Even though we're prompting for 1 or 2, we'll allow some other inputs to make it easy
-    if [ "$REPLY" = "yes" ] || [ "$REPLY" = "Yes" ] || [ "$REPLY" = "y" ] || [ "$REPLY" = "Y" ]
-    then
-	yn_response=y
-	break
-    elif [ "$REPLY" = "no" ] || [ "$REPLY" = "No" ] || [ "$REPLY" = "n" ] || [ "$REPLY" = "N" ]
-    then
-	yn_response=n
-	break
-    fi
-
-    case $REPLY in
-	1 ) yn_response=y; break ;;
-	2 ) yn_response=n; break ;;
-	* ) echo_colorized -fy "$help_prompt"
-    esac
-done
-PS3=$oPS3 # Put the select prompt back to whatever it was
-
-echo
-if [ ! -z "$yn_response" ] && [ "$yn_response" = "y" ]
-then
-    echo_colorized -fg "Installing YouCompleteMe"
-    if [ "$EUID" -ne 0 ]
-    then
-	echo_colorized -fy "We'll need your password"
-    fi
-    sudo apt update
-    sudo apt install --assume-yes vim-addon-manager vim-youcompleteme
-    if [ $? -ne 0 ]
-    then
-	echo_colorized -fy -br "ERROR DETECTED DURING APT INSTALL"
-    else
-	vim-addon-manager install youcompleteme
-	echo_colorized -fg "YouCompleteMe Installed"
-
-	echo
-	echo_colorized -fg "Installing compiledb"
-	sudo apt install --assume-yes python3-pip
-	yes | sudo pip3 install compiledb --break-system-packages
-    fi
-else
-    echo_colorized -fr "Not installing YouCompleteMe"
-fi
 
 echo
 
